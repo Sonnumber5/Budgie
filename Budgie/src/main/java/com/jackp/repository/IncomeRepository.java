@@ -1,7 +1,7 @@
 package com.jackp.repository;
 
+import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -30,8 +30,8 @@ public class IncomeRepository {
 
     }
     
-    public List<IncomeEntity> findByDateDescOrder(int userId, Date date) {
-        String sql = "SELECT * FROM income WHERE users_ID = ? AND date = ? ORDER BY date DESC";
+    public List<IncomeEntity> findByDateDescOrder(int userId, LocalDate date) {
+        String sql = "SELECT * FROM income WHERE users_ID = ? AND DATE_FORMAT(date, '%Y-%m') = ? ORDER BY date DESC";
 
         try {
             return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), userId, date);
@@ -41,7 +41,7 @@ public class IncomeRepository {
         }
     }
     
-    public List<IncomeEntity> searchFilter(String searchFilter, int userId) {
+    public List<IncomeEntity> findBySearch(String searchFilter, int userId) {
         String sql = "SELECT * FROM income WHERE users_ID = ? AND Description like ? ORDER BY date DESC";
 
         try {
