@@ -1,5 +1,6 @@
 package com.jackp.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -15,7 +16,7 @@ public class IncomeEntity {
 	private String description;
 
 	@Column("AMOUNT")
-	private double amount;
+	private BigDecimal amount;
 	
 	@Column("DATE")
 	private Date date;
@@ -28,7 +29,7 @@ public class IncomeEntity {
 	
 	public IncomeEntity(){}
 	
-	public IncomeEntity(int id, String description, double amount, Date date, String notes, int userId) {
+	public IncomeEntity(int id, String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.id = id;
 		this.description = description;
 		this.amount = amount;
@@ -37,7 +38,7 @@ public class IncomeEntity {
 		this.userId = userId;
 	}
 	
-	public IncomeEntity(String description, double amount, Date date, String notes, int userId) {
+	public IncomeEntity(String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.description = description;
 		this.amount = amount;
 		this.date = date;
@@ -61,11 +62,11 @@ public class IncomeEntity {
 		this.description = description;
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 
