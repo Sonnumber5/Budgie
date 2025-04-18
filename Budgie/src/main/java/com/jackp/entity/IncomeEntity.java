@@ -1,7 +1,7 @@
 package com.jackp.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -19,7 +19,7 @@ public class IncomeEntity {
 	private BigDecimal amount;
 	
 	@Column("DATE")
-	private LocalDate date;
+	private Date date;
 	
 	@Column("NOTES")
 	private String notes;
@@ -29,7 +29,7 @@ public class IncomeEntity {
 	
 	public IncomeEntity(){}
 	
-	public IncomeEntity(int id, String description, BigDecimal amount, LocalDate date, String notes, int userId) {
+	public IncomeEntity(int id, String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.id = id;
 		this.description = description;
 		this.amount = amount;
@@ -38,7 +38,7 @@ public class IncomeEntity {
 		this.userId = userId;
 	}
 	
-	public IncomeEntity(String description, BigDecimal amount, LocalDate date, String notes, int userId) {
+	public IncomeEntity(String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.description = description;
 		this.amount = amount;
 		this.date = date;
@@ -70,11 +70,11 @@ public class IncomeEntity {
 		this.amount = amount;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

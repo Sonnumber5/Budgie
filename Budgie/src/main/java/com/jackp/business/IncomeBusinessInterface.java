@@ -8,6 +8,7 @@ import com.jackp.model.IncomeModel;
 
 public interface IncomeBusinessInterface {
 	public List<IncomeModel> getAllByKeyWordDesc(int userId, String keyword);
-	public List<IncomeModel> getAllByDateDesc(int userId, LocalDate date);
-	public BigDecimal getIncomeSumByDate(int userId, LocalDate date);
+	public List<IncomeModel> getAllByDateDesc(int userId, String date);
+	public BigDecimal getIncomeSumByDate(int userId, String date);
+	public void addIncome(IncomeModel income);
 }

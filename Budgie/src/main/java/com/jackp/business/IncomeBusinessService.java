@@ -28,7 +28,7 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 	}
 
 	@Override
-	public List<IncomeModel> getAllByDateDesc(int userId, LocalDate date) {
+	public List<IncomeModel> getAllByDateDesc(int userId, String date) {
 		List<IncomeEntity> incomes = incomeRepository.findByDateDescOrder(userId, date);
 		List<IncomeModel> result = new ArrayList<>();
 		
@@ -41,9 +41,15 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 	}
 
 	@Override
-	public BigDecimal getIncomeSumByDate(int userId, LocalDate date) {
+	public BigDecimal getIncomeSumByDate(int userId, String date) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addIncome(IncomeModel income) {
+		IncomeEntity entity = new IncomeEntity(income.getDescription(), income.getAmount(), income.getDate(), income.getNotes(), income.getUserId());
+		incomeRepository.insertIncome(entity);
 	}
 
 	

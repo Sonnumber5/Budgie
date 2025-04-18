@@ -1,5 +1,6 @@
 package com.jackp.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -11,7 +12,7 @@ public class ExpenseModel {
 	
     private String description;
 	
-    private double amount;
+    private BigDecimal amount;
 	
     private String category;
 	
@@ -22,7 +23,7 @@ public class ExpenseModel {
 
     public ExpenseModel() {}
     
-    public ExpenseModel(int id, String description, double amount, String category, Date date, String notes) {
+    public ExpenseModel(int id, String description, BigDecimal amount, String category, Date date, String notes) {
         this.id = id;
     	this.description = description;
         this.amount = amount;
@@ -31,7 +32,7 @@ public class ExpenseModel {
         this.notes = notes;
     }
     
-    public ExpenseModel(String description, double amount, String category, Date date, String notes) {
+    public ExpenseModel(String description, BigDecimal amount, String category, Date date, String notes) {
         this.description = description;
         this.amount = amount;
         this.category = category;
@@ -57,11 +58,11 @@ public class ExpenseModel {
         this.description = description;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

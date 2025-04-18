@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-@RequestMapping
 @Controller
 public class HomeController {
 	
@@ -26,24 +25,25 @@ public class HomeController {
 		this.userBusinessInterface = userBusinessInterface;
 	}
 
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String viewHomePage(Authentication auth, HttpSession session, Model model) {
 		
 		String sessionUsername = auth.getName();
 		int sessionUserId = userBusinessInterface.getUserIdByUsername(sessionUsername);
 		
 		session.setAttribute("sessionUserId", sessionUserId);
+		session.setAttribute("sessionUsername", sessionUsername);
+		model.addAttribute("sessionUsername", sessionUsername);
 		
 		return "home";
 
 	}
 	
-	@PostMapping("/filteredDate")
+	@PostMapping("/home/filteredDate")
     public String FilteredAttributesByDate(Model model, HttpSession session, @RequestParam(value = "filterByDate", required = false) String selectedDate) {
         if (selectedDate != null && !selectedDate.isEmpty()) {
-        	selectedDate = selectedDate + "-01";
-        	LocalDate localDate = LocalDate.parse(selectedDate);
-            session.setAttribute("filterByDate", localDate);
+
+            session.setAttribute("selectedDate", selectedDate);
         }
         return "redirect:/home"; 
     }

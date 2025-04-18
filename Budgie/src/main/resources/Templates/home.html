@@ -10,6 +10,7 @@
 <body>
 	<section>
 		<div layout:fragment="content">
+			<h3 th:text="'Welcome ' + ${sessionUsername}">Income List</h3>
 			<div class="result-container">
 				<form th:action="@{/home/filteredDate}" method="post">
 					<div class="form-group">

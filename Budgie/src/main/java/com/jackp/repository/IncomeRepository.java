@@ -30,7 +30,7 @@ public class IncomeRepository {
 
     }
     
-    public List<IncomeEntity> findByDateDescOrder(int userId, LocalDate date) {
+    public List<IncomeEntity> findByDateDescOrder(int userId, String date) {
         String sql = "SELECT * FROM income WHERE users_ID = ? AND DATE_FORMAT(date, '%Y-%m') = ? ORDER BY date DESC";
 
         try {

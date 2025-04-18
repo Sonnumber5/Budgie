@@ -1,7 +1,7 @@
 package com.jackp.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,7 +15,7 @@ public class IncomeModel {
 	private BigDecimal amount;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private Date date;
 	
 	private String notes;
 	
@@ -24,7 +24,7 @@ public class IncomeModel {
 	
 	public IncomeModel() {}
 	
-	public IncomeModel(int id, String description, BigDecimal amount, LocalDate date, String notes, int userId) {
+	public IncomeModel(int id, String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.id = id;
 		this.description = description;
 		this.amount = amount;
@@ -33,7 +33,7 @@ public class IncomeModel {
 		this.userId = userId;
 	}
 	
-	public IncomeModel(String description, BigDecimal amount, LocalDate date, String notes, int userId) {
+	public IncomeModel(String description, BigDecimal amount, Date date, String notes, int userId) {
 		this.description = description;
 		this.amount = amount;
 		this.date = date;
@@ -66,11 +66,11 @@ public class IncomeModel {
 		this.amount = amount;
 	}
 	
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
