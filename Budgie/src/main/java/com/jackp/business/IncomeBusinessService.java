@@ -47,9 +47,46 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 	}
 
 	@Override
-	public void addIncome(IncomeModel income) {
+	public String addIncome(IncomeModel income) {
 		IncomeEntity entity = new IncomeEntity(income.getDescription(), income.getAmount(), income.getDate(), income.getNotes(), income.getUserId());
-		incomeRepository.insertIncome(entity);
+		try {
+			incomeRepository.insert(entity);
+			return "Successfully added income";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "Error adding income:\n" + e;
+		}
+	}
+
+	@Override
+	public String deleteSelectedIncome(int incomeId) {
+		try {
+			incomeRepository.deleteById(incomeId);
+			return "Successfully deleted income";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "Error deleting income:\n" + e;
+		}
+	}
+
+	@Override
+	public IncomeModel getIncomeById(int incomeId) {
+		IncomeEntity entity = incomeRepository.findById(incomeId);
+		return new IncomeModel(entity.getId(), entity.getDescription(), entity.getAmount(), entity.getDate(), entity.getNotes(), entity.getUserId());
+	}
+
+	@Override
+	public String updateSelectedIncome(IncomeModel income) {
+		IncomeEntity incomeEntity = new IncomeEntity(income.getId(), income.getDescription(), income.getAmount(), income.getDate(), income.getNotes(), income.getUserId());
+		try {
+			incomeRepository.update(incomeEntity);
+			return "Successfully updated income";
+			//return "" + incomeEntity.getId()+ "\n" + incomeEntity.getDescription() + "\n" + incomeEntity.getAmount()+ "\n" + incomeEntity.getDate() + "\n" + incomeEntity.getNotes() + "\n" + incomeEntity.getUserId() + "\n";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "Error updating income:\n" + e;
+		}
+		
 	}
 
 	

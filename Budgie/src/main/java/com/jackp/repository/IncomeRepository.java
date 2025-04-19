@@ -18,38 +18,66 @@ public class IncomeRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public String insertIncome(IncomeEntity income) {
-    	String sql = "INSERT INTO income (description, amount, date, notes, users_ID) VALUES (?,?,?,?,?)";
+    public void insert(IncomeEntity income) {
+    	String sql = "INSERT INTO income (description, amount, date, notes, userId) VALUES (?,?,?,?,?)";
         try {
             jdbcTemplate.update(sql,income.getDescription(), income.getAmount(), income.getDate(), income.getNotes(), income.getUserId());
-            return "Registration Successful";
         }catch(Exception e) {
         	e.printStackTrace();
-    		return "Error Registering" + e.getMessage();
     	}
 
     }
     
-    public List<IncomeEntity> findByDateDescOrder(int userId, String date) {
-        String sql = "SELECT * FROM income WHERE users_ID = ? AND DATE_FORMAT(date, '%Y-%m') = ? ORDER BY date DESC";
+    public List<IncomeEntity> findByDateDescOrder(int incomeId, String date) {
+        String sql = "SELECT * FROM income WHERE userId = ? AND DATE_FORMAT(date, '%Y-%m') = ? ORDER BY date DESC";
 
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), userId, date);
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), incomeId, date);
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();
         }
     }
     
-    public List<IncomeEntity> findBySearch(String searchFilter, int userId) {
-        String sql = "SELECT * FROM income WHERE users_ID = ? AND Description like ? ORDER BY date DESC";
+    public List<IncomeEntity> findBySearch(String searchFilter, int incomeId) {
+        String sql = "SELECT * FROM income WHERE userId = ? AND Description like ? ORDER BY date DESC";
 
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), userId, "%" + searchFilter.toLowerCase() + "%");
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), incomeId, "%" + searchFilter.toLowerCase() + "%");
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();
         }
     }
+
+	public void deleteById(int incomeId) {
+		String sql = "DELETE FROM income WHERE ID = ?";
+		
+		try {
+			jdbcTemplate.update(sql, incomeId);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public IncomeEntity findById(int incomeId) {
+		String sql = "SELECT * FROM income WHERE ID = ?";
+		try {
+			return (IncomeEntity) jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), incomeId);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void update(IncomeEntity incomeEntity) {
+		String sql = "UPDATE income SET description = ?, amount = ?, date = ?, notes = ? WHERE ID = ?";
+		try {
+			jdbcTemplate.update(sql, incomeEntity.getDescription(), incomeEntity.getAmount(), incomeEntity.getDate(), incomeEntity.getNotes(), incomeEntity.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
