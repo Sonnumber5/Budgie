@@ -81,7 +81,6 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 		try {
 			incomeRepository.update(incomeEntity);
 			return "Successfully updated income";
-			//return "" + incomeEntity.getId()+ "\n" + incomeEntity.getDescription() + "\n" + incomeEntity.getAmount()+ "\n" + incomeEntity.getDate() + "\n" + incomeEntity.getNotes() + "\n" + incomeEntity.getUserId() + "\n";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "Error updating income:\n" + e;

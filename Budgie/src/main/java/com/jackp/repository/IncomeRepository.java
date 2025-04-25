@@ -39,11 +39,11 @@ public class IncomeRepository {
         }
     }
     
-    public List<IncomeEntity> findBySearch(String searchFilter, int incomeId) {
+    public List<IncomeEntity> findBySearch(String searchFilter, int userId) {
         String sql = "SELECT * FROM income WHERE userId = ? AND Description like ? ORDER BY date DESC";
 
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), incomeId, "%" + searchFilter.toLowerCase() + "%");
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(IncomeEntity.class), userId, "%" + searchFilter.toLowerCase() + "%");
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();

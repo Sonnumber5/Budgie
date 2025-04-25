@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 public class IncomeModel {
 	
 	private int id;
