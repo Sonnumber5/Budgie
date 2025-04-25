@@ -7,24 +7,24 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("INCOME")
+@Table("income")
 public class IncomeEntity {
 	@Id
 	private int id;
 	
-	@Column("DESCRIPTION")
+	@Column("description")
 	private String description;
 
-	@Column("AMOUNT")
+	@Column("amount")
 	private BigDecimal amount;
 	
-	@Column("DATE")
+	@Column("date")
 	private Date date;
 	
-	@Column("NOTES")
+	@Column("notes")
 	private String notes;
 	
-	@Column("USERS_ID")
+	@Column("userId")
     private int userId;
 	
 	public IncomeEntity(){}

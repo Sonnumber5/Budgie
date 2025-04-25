@@ -28,23 +28,28 @@ public class ExpenseEntity {
 	@Column("notes")
 	private String notes;
 	
+	@Column("userId")
+	private int userId;
+	
 	public ExpenseEntity() {}
 	
-	public ExpenseEntity(int id, String description, BigDecimal amount, String category, Date date, String notes) {
+	public ExpenseEntity(int id, String description, BigDecimal amount, String category, Date date, String notes, int userId) {
 		this.id = id;
 		this.description = description;
 		this.amount = amount;
 		this.category = category;
 		this.date = date;
 		this.notes = notes;
+		this.userId = userId;
 	}
 	
-	public ExpenseEntity(String description, BigDecimal amount, String category, Date date, String notes) {
+	public ExpenseEntity(String description, BigDecimal amount, String category, Date date, String notes, int userId) {
 		this.description = description;
 		this.amount = amount;
 		this.category = category;
 		this.date = date;
 		this.notes = notes;
+		this.userId = userId;
 	}
 
 	public int getId() {
@@ -93,5 +98,13 @@ public class ExpenseEntity {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }

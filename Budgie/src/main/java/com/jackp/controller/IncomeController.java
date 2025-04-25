@@ -28,7 +28,7 @@ public class IncomeController {
 	}
 
 	@GetMapping("/income/getIncome")
-	public String viewHomePage(HttpServletRequest request, Model model) {
+	public String viewIncomesPage(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
 		int sessionUserId = (Integer) session.getAttribute("sessionUserId");
@@ -65,7 +65,6 @@ public class IncomeController {
 	public String updateSelectedIncome(Model model, @RequestParam int incomeId) {
 
 		IncomeModel income = incomeBusinessInterface.getIncomeById(incomeId);
-		//System.out.println(income.getId()+ "\n" + income.getDescription() + "\n" + income.getAmount()+ "\n" + income.getDate() + "\n" + income.getNotes() + "\n" + income.getUserId());
 
 		model.addAttribute("income", income);
 		return "updateIncome";
@@ -73,8 +72,8 @@ public class IncomeController {
 	
 	@PostMapping("/income/incomeToUpdate/confirmUpdate")
 	public String updateIncome(Model model, @ModelAttribute IncomeModel income, @RequestParam int incomeId) {
+		
 		income.setId(incomeId);
-		System.out.println(income.getId() + "\n" + income.getDescription() + "\n" + income.getAmount()+ "\n" + income.getDate() + "\n" + income.getNotes() + "\n" + income.getUserId());
 		String updateIncomeMessage = incomeBusinessInterface.updateSelectedIncome(income);
 		System.out.println(updateIncomeMessage);
 		return "redirect:/income/getIncome";
