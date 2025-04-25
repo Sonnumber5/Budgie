@@ -10,7 +10,8 @@
 <body>
 	<section>
 		<div layout:fragment="content">
-			<h3 th:text="'Welcome ' + ${sessionUsername}">Income List</h3>
+			<h2 th:text="'Welcome, ' + ${sessionUsername}">Welcome</h2>
+			<h4 th:text="${spelledOutDate}">Year Month</h4>
 			<div class="result-container">
 				<form th:action="@{/home/filteredDate}" method="post">
 					<div class="form-group">
@@ -27,7 +28,7 @@
 			    </div>
 			    <div class="result-box">
 			        <span>Total Income</span>
-			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(monthIncomes != null ? monthIncomes : 0.0, 1, 2)}"></span>
+			        <span style="font-weight: bold;" th:text="'$' + ${selectedDateIncome}"></span>
 			    </div>
 			    <div class="result-box">
 			        <span>Total In Savings Funds</span>

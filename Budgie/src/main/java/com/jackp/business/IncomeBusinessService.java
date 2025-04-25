@@ -42,8 +42,13 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 
 	@Override
 	public BigDecimal getIncomeSumByDate(int userId, String date) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return incomeRepository.findSumByDate(userId, date);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
