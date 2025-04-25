@@ -1,5 +1,6 @@
 package com.jackp.repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -77,6 +78,17 @@ public class IncomeRepository {
 			jdbcTemplate.update(sql, incomeEntity.getDescription(), incomeEntity.getAmount(), incomeEntity.getDate(), incomeEntity.getNotes(), incomeEntity.getId());
 		}catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public BigDecimal findSumByDate(int userId, String date) {
+		String sql = "SELECT SUM(amount) FROM income where userId = ? AND DATE_FORMAT(date, '%Y-%m') = ?";
+		try {
+			BigDecimal sum = jdbcTemplate.queryForObject(sql, BigDecimal.class, userId, date);
+			return sum;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
