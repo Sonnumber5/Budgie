@@ -82,7 +82,7 @@ public class ExpenseRepository {
 		}
 	}
 	
-	public BigDecimal findTotalByDate(String date, int userId) {
+	public BigDecimal findSumByDate(String date, int userId) {
 		String sql = "SELECT SUM(amount) FROM expenses where userId = ? AND DATE_FORMAT(date, '%Y-%m') = ?";
 		try {
 			BigDecimal sum = jdbcTemplate.queryForObject(sql, BigDecimal.class, userId, date);

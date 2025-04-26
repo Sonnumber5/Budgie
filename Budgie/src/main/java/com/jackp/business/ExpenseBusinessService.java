@@ -51,7 +51,17 @@ public class ExpenseBusinessService implements ExpenseBusinessInterface {
 
 	@Override
 	public BigDecimal getExpenseSumByDate(int userId, String date) {
-		return expenseRepository.findTotalByDate(date, userId);
+		try {
+			BigDecimal sum = expenseRepository.findSumByDate(date, userId);
+			if (sum == null) {
+				sum = BigDecimal.valueOf(0.00);
+			}
+			return sum;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

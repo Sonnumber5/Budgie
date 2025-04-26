@@ -43,7 +43,11 @@ public class IncomeBusinessService implements IncomeBusinessInterface{
 	@Override
 	public BigDecimal getIncomeSumByDate(int userId, String date) {
 		try {
-			return incomeRepository.findSumByDate(userId, date);
+			BigDecimal sum = incomeRepository.findSumByDate(userId, date);
+			if (sum == null) {
+				sum = BigDecimal.valueOf(0.00);
+			}
+			return sum;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
