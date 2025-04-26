@@ -17,14 +17,35 @@ public class UserBusinessService implements UserBusinessInterface{
 	@Override
 	public String addUser(UserModel user) {
 		UserEntity userEntity = new UserEntity(user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword(), user.getEmail());
-		String result = userRepository.registerUser(userEntity);
-		return result;
+		try {
+			String result = userRepository.registerUser(userEntity);
+			return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public int getUserIdByUsername(String sessionUsername) {
-		UserEntity user = userRepository.findByUsername(sessionUsername);
-		return user.getId();
+		try {
+			UserEntity user = userRepository.findByUsername(sessionUsername);
+			return user.getId();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	@Override
+	public UserModel getUserByUsername(String sessionUsername) {
+		try {
+			UserEntity entity = userRepository.findByUsername(sessionUsername);
+			return new UserModel(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getUserName(), entity.getPassword(), entity.getEmail());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

@@ -32,13 +32,13 @@ public class ExpenseController {
 		
 		HttpSession session = request.getSession();
 		int sessionUserId = (Integer) session.getAttribute("sessionUserId");
-
-		//TEST DATE
-		String selectedDate = "2025-04";
+		String selectedDate = (String)session.getAttribute("selectedDate");
+		String spelledOutDate = (String)session.getAttribute("spelledOutDate");
 		
 		List<List<ExpenseModel>> categories = expenseBusinessInterface.getAllByDateDesc(sessionUserId, selectedDate);
 		model.addAttribute("categories", categories);
 		model.addAttribute("sessionUserId", sessionUserId);
+		model.addAttribute("spelledOutDate", spelledOutDate);
 		
 		return "expenses";
 	}

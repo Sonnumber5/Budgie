@@ -32,12 +32,13 @@ public class IncomeController {
 		
 		HttpSession session = request.getSession();
 		int sessionUserId = (Integer) session.getAttribute("sessionUserId");
-		//String selectedDate = (String)session.getAttribute("selectedDate");
-		String selectedDate = "2025-04";
+		String selectedDate = (String)session.getAttribute("selectedDate");
+		String spelledOutDate = (String)session.getAttribute("spelledOutDate");
 		
 		List<IncomeModel> incomes = incomeBusinessInterface.getAllByDateDesc(sessionUserId, selectedDate);
 		model.addAttribute("incomes", incomes);
 		model.addAttribute("sessionUserId", sessionUserId);
+		model.addAttribute("spelledOutDate", spelledOutDate);
 		
 		return "income";
 	}

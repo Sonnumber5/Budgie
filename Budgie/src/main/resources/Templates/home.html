@@ -10,7 +10,7 @@
 <body>
 	<section>
 		<div layout:fragment="content">
-			<h2 th:text="'Welcome, ' + ${sessionUsername}">Welcome</h2>
+			<h2 th:text="'Welcome, ' + ${sessionUserFirstname}">Welcome</h2>
 			<h4 th:text="${spelledOutDate}">Year Month</h4>
 			<div class="result-container">
 				<form th:action="@{/home/filteredDate}" method="post">
@@ -24,20 +24,20 @@
 			<div class="result-container">
 			    <div class="result-box">
 			        <span>Total Expenses</span>
-			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(monthExpenses != null ? monthExpenses : 0.0, 1, 2)}"></span>
+			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(selectedDateExpenses, 1, 2)}"></span>
 			    </div>
 			    <div class="result-box">
 			        <span>Total Income</span>
-			        <span style="font-weight: bold;" th:text="'$' + ${selectedDateIncome}"></span>
+			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(selectedDateIncome, 1, 2)}"></span>
 			    </div>
 			    <div class="result-box">
 			        <span>Total In Savings Funds</span>
-			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(funds != null ? funds : 0.0, 1, 2)}"></span>
+			        <span style="font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(selectedDateIncome - selectedDateExpenses, 1, 2)}"></span>
 			    </div>
 			    <div class="result-box">
-			        <span>Remaining</span>
+			        <span>Current Remaining</span>
 			        <span style="font-weight: bold;"
-			              th:text="'$' + ${#numbers.formatDecimal((monthIncomes != null ? monthIncomes : 0.0) - (monthIncomes != null ? monthIncomes : 0.0) - (funds != null ? funds : 0.0), 1, 2)}"></span>
+			              th:text="'$' + ${#numbers.formatDecimal(selectedDateIncome - selectedDateExpenses, 1, 2)}"></span>
 			    </div>
 			</div>
 
@@ -48,7 +48,7 @@
 				<a href="#" th:href="@{/expenses/getExpenses}">
 					<button type="button" class="expense-btn">Expenses</button>
 				</a>
-				<a href="#" th:href="@{/funds/getFunds}">
+				<a href="#" th:href="@{/savingsFunds/getFunds}">
 					<button type="button" class="fund-btn">Savings Funds</button>
 				</a>
 			</div>
