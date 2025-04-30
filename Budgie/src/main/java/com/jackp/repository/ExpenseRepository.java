@@ -30,11 +30,11 @@ public class ExpenseRepository {
 
     }
     
-    public List<ExpenseEntity> findByDateDescOrder(int expenseId, String date) {
+    public List<ExpenseEntity> findByDateDescOrder(int userId, String date) {
         String sql = "SELECT * FROM expenses WHERE userId = ? AND DATE_FORMAT(date, '%Y-%m') = ? ORDER BY date DESC";
 
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ExpenseEntity.class), expenseId, date);
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ExpenseEntity.class), userId, date);
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();

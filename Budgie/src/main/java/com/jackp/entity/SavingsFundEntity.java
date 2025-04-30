@@ -1,29 +1,40 @@
-package com.jackp.model;
+package com.jackp.entity;
 
 import java.math.BigDecimal;
 
-public class SavingsFundModel {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("savingsFunds")
+public class SavingsFundEntity {
+	@Id
 	private int id;
+	@Column("name")
 	private String name;
+	@Column("goal")
 	private BigDecimal goal;
+	@Column("amount")
 	private BigDecimal amount;
+	@Column("userId")
 	private int userId;
 	
-	public SavingsFundModel() {}
-
-	public SavingsFundModel(String name, BigDecimal goal, BigDecimal amount, int userId) {
+	public SavingsFundEntity() {}
+	
+	public SavingsFundEntity(String name, BigDecimal goal, BigDecimal amount, int userId) {
 		this.name = name;
 		this.goal = goal;
 		this.amount = amount;
 		this.userId = userId;
 	}
-	public SavingsFundModel(int id, String name, BigDecimal goal, BigDecimal amount, int userId) {
+	public SavingsFundEntity(int id, String name, BigDecimal goal, BigDecimal amount, int userId) {
 		this.id = id;
 		this.name = name;
 		this.goal = goal;
 		this.amount = amount;
 		this.userId = userId;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -54,6 +65,5 @@ public class SavingsFundModel {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
 	
 }
