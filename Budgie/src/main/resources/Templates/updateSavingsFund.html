@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="layouts/defaultTemplate">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Savings Fund</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <div layout:fragment="content">
+        <section class="main-form">
+            <h3 th:text="${header}">Update Savings Fund</h3>
+            <form th:action="@{/savingsFunds/fundToUpdate/confirmUpdate}" method="post">
+				<div class="form-group">
+					<input type="hidden" name="fundId" th:value="${fundToUpdate.id}">
+                </div>
+				<div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" th:value="${fundToUpdate.name}" th:placeholder="${fundToUpdate.name}"required>
+                </div>
+                <div class="form-group">
+                    <label for="goal">Goal</label>
+                    <input type="number" id="goal" name="goal" step="0.01" th:value="${fundToUpdate.goal}" th:placeholder="${fundToUpdate.goal}" required>
+                </div>
+				<div class="form-group">
+				    <label for="amount">Amount</label>
+				    <input type="number" id="amount" name="amount" step="0.01" th:value="${fundToUpdate.amount}" th:placeholder="${fundToUpdate.amount}" required>
+				</div>
+				
+                <div class="form-group">
+					<input type="hidden" name="userId" th:value="${fundToUpdate.userId}">
+                    <button class="btn" type="submit">Confirm</button>
+                </div>
+            </form>
+			<form th:action="@{/savingsFunds/getFunds}" method="get">
+				<button class="btn" type="submit">Cancel</button>
+			</form>
+        </section>
+    </div>
+</body>
+</html>
